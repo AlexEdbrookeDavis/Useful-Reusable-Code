@@ -136,7 +136,7 @@ for i in range(0, EPISODE_COUNT):
 	if(i % 50 == 49 and epsilon > 10):
 		epsilon = epsilon - 1
 	if(i % 100 == 99 ):
-		trainingreward[(i / 100)] = int(episodereward)
+		trainingreward[(int(i / 100))] = int(episodereward)
 #save Training reward data
 #trainingreward.to_csv('TrainReward.csv')
 np.savetxt('TrainReward.csv', trainingreward, delimiter=',')
@@ -222,7 +222,7 @@ for i in range(0, EPISODE_COUNT):
 				botloc[1] = botloc[1] + 1
 				reward = 0
 		else:
-			print "ERROR"
+			print("ERROR")
 		#print "movement data"
 		#print state
 		#print randoma
@@ -240,5 +240,5 @@ for i in range(0, EPISODE_COUNT):
 		episodereward = episodereward + reward
 	testrewards[i] = episodereward
 
-print np.mean(testrewards)
-print np.std(testrewards)
+print(np.mean(testrewards))
+print(np.std(testrewards))

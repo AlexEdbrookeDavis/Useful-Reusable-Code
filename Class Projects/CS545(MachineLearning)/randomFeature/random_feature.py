@@ -41,15 +41,15 @@ clf.fit(X, y)
 
 y_score = clf.fit(X, y).decision_function(X_test)
 
-print clf.coef_
+print (clf.coef_)
 
 
 import operator
 min_index, min_value = min(enumerate(abs(clf.coef_[0])), key=operator.itemgetter(1))
 coef = clf.coef_[0].tolist()
-print coef[55]
-print sorted(range(len(coef)), key=lambda i: abs(coef[i]))[-5:]
-print accuracy_score(clf.predict(X_test), y_test)
+print (coef[55])
+print (sorted(range(len(coef)), key=lambda i: abs(coef[i]))[-5:])
+print (accuracy_score(clf.predict(X_test), y_test))
 
 for index in range(57, 2, -1):
 	min_index = random.randrange(0, index, 1)
@@ -64,4 +64,4 @@ for index in range(57, 2, -1):
 	clf = SVC(kernel='linear')
 	clf.fit(X, y)
 	y_score = clf.fit(X, y).decision_function(X_test)
-	print accuracy_score(clf.predict(X_test), y_test)
+	print(accuracy_score(clf.predict(X_test), y_test))
