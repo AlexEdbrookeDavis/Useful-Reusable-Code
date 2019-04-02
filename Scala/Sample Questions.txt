@@ -1,0 +1,121 @@
+1. What is ofDim in Scala?
+Init:
+val a = Array.ofDim[Type](Dim1, Dim2, etc.)
+Iterate:
+for { i <- 0 until rows, j <- 0 until cols } println(s"($i)($j) = ${a(i)(j)}")
+Java Equivelent:
+private final String arr[][];
+
+
+2. What is a BitSet?
+BitSet represents a collection of small integers as the bits of a larger integer.
+The memory footprint of a bitset is determined by the largest number stored in it.
+BitSet also allows you to store unique elements with no repeatable values.
+
+Searching for values returns a True/False
+
+It is a very space effecient way to store large amounts of unique values.
+Speed effecency is not a consideration though.
+
+3. What is a vector in Scala?
+Accessing or modifying elements later in a list takes time linear to the depth into the list.
+A vector solves this by using a branching tree for storing data, allowing for effectivly constant access/modify time.
+NEEDS MORE
+
+4. Explain streams in Scala.
+A list with lazy computation of it's elements. Great for infinate list's
+
+5. What are the advantages of Scala?
+A healthy mix of OOP and Functional programming, givin in a easy to write and read format.
+Massivly compatable with Java
+
+6. Who designed Scala? Which is the latest version?
+
+2.12.8
+
+7. Why do we need App in Scala?
+The App trait can be used to quickly turn objects into executable programs.
+When a program is run, it searchs for the main method of the App
+
+8. How is a class different from an object?
+A class is a blueprint describing the information required to generate an object.
+An object is a collection of methods and variables.
+
+9. What is a monad in Scala?
+Scala doesn’t come with a built-in monad type
+A Monad is not a class or a trait; it is a concept.
+A Monad is an object that wraps another object in Scala. 
+In Monads, the output of a calculation at any step is the input to other calculations, which run as a parent to the current step.
+trait M[A] {
+  def flatMap[B](f: A => M[B]): M[B] // map a function to the wrapper
+}
+  
+def unit[A](x: A): M[A] // Wrap up A
+NEEDS MORE RESEARCH
+Option is a monad
+
+10. Differentiate a Scala function from a Java method.
+Scala functions are objects, and can be passed as arguments. (double check this for Java)
+
+11. Explain vararg arguments.
+Scala varargs is a syntax
+def printAll(strings: String*) { // it's the *
+    println(strings.getClass)
+}
+scala.collection.mutable.WrappedArray$ofInt
+Allow's for a variable number of arguments.
+Can be iterated over
+
+12. What do you know about traits in Scala?
+Traits are used to share interfaces and fields between classes
+Used like interfaces in java
+
+13. What is an Option in Scala?
+It's a monad.
+Used to avoid null values.
+
+
+14. What is a tail-recursion in Scala?
+A function that end's by calling itself, allowing for repetition of the internal work. (IMPROVE)
+Specifically placed at the end so that memory doesn't have to be saved for continuing the function when the recersive call ends.
+
+
+Part 2:
+1. Why does Scala prefer immutability? Explain a example that you have used in your project experience
+Immutability prevent's side effect's. One programmer can't change the variable of another programmer.
+This is a key thought in functional programming. 
+If something needs to change, just make a new changed copy, or append an "update" that describes the change
+That way, you can use a reference instead of passing a value
+
+A key counter-example is the code I wrote in C++. 
+I built the code to pass a variable into multiple threads, using it as a reference to track the program's state.
+I had to make a mutex to block the program whenever a thread rewrote the variable.
+If I had used immutable values, I could have had the writer build an update instead, while the other threads read the old version.
+
+2. Explain ‘Scala higher order’ functions? Explain a example that you have used in your project experience
+A higher-order function takes other functions as a parameter or returns a function as a result.
+A function function
+Map is a perfect example of this
+
+3. What is String Interpolation?
+String Interpolation allows users to embed variable references directly in processed string literals.
+
+4. Explain the difference between ‘concurrency’ and ‘parallelism? -- Need to learn and be able to explain via examples
+Concurrency is two tasks being worked over a shared time periods, including alternating time slices.
+Parallelism is physically running two or more threads at the same time (split between tasks, or cooperating on one task)
+
+5. Could you comfortably explain the difference between a Monad and an applicative functor?
+A Monad is a function that apply's a function that returns a wrapped value to a wrapped value
+an applicative functor is a function that apply's a wrapped function to a wrapped value
+
+Applicative functors are often mentioned as an alternative to monads when your computation steps are independent.
+This is because composing Monads infer's in-order computing, while applicative functors do not.
+https://stackoverflow.com/questions/19880207/when-and-why-should-one-use-applicative-functors-in-scala
+
+6. Could you explain the actor model and what problem it solves?
+Scala's primary concurrency construct is actors. 
+Actors are basically concurrent processes that communicate by exchanging messages. 
+https://www.scala-lang.org/old/node/242
+
+7. What's the best practice recommendation of doing error handling in Scala ?
+Options
